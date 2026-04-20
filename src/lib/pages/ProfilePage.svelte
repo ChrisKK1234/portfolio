@@ -12,8 +12,9 @@
     .duo-info .wrapper { width: 100%; }
     
     .duo-info .wrapper .title { color: var(--color-white); line-height: 1; margin: auto; margin-bottom: var(--lg); }
-    .duo-info .wrapper .bio-wrapper { width: 100%; margin: auto; max-width: 910px; display: flex; gap: 2rem; justify-content: space-between; margin-top: 2rem; }
+    .duo-info .wrapper .bio-wrapper { width: 100%; margin: auto; max-width: 910px; display: flex; gap: var(--md); justify-content: space-between; margin-top: 2rem; }
     .duo-info .wrapper .bio-wrapper .text { color: var(--color-white); width: 100%; min-width: 300px; max-width: 500px; }
+    .duo-info .wrapper .bio-wrapper .text h3 { text-transform: none; margin-bottom: var(--xs); line-height: 1; }
 
     .duo-info .wrapper .bio-wrapper .media { border-radius: var(--rounded-md); overflow: hidden; max-width: 300px; }
     .duo-info .wrapper .bio-wrapper .media img { width: 100%; height: auto; display: block; }
