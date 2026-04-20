@@ -1,0 +1,9 @@
+{
+	"/": [],
+	"/404": [],
+	"/[...slug]": [
+		"src/routes/[...slug]/+page.server.js",
+		"src/routes/[...slug]/+layout.server.js",
+		"src/routes/[...slug]/+layout.server.js"
+	]
+}

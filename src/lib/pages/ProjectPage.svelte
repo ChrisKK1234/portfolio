@@ -4,6 +4,36 @@ import RichText from "$lib/atoms/RichText.svelte";
     console.log('ProjectPage data:', data);
 </script>
 
+<style>
+    .m-gap > * { margin-bottom: var(--m-gap); }
+    .m-gap > :last-of-type { margin-bottom: var(--md); }
+
+    .project-page-template.content { padding: 0 var(--md); padding-top: calc(var(--md) * 3 + var(--m-gap)); color: var(--color-white); text-align: center; }
+    .project-page-template.content .heading { width: fit-content; margin: 0 auto; line-height: 0.9; margin-bottom: var(--m-gap); }
+
+    .text-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--md); }
+
+    .simple-media { width: 100%; max-width: 100vw; height: auto; max-height: 90svh; overflow: hidden; }
+    .simple-media picture > * { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+    .media-grid { display: grid; grid-template-columns: repeat(3, minmax(250px, 1fr)); gap: var(--sm); }
+    .media-grid .item { width: 100%; height: auto; overflow: hidden; }
+    .media-grid .item img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    .credits .recognition { line-height: 1; padding-bottom: var(--md); }
+    .credits .awards { font-size: var(--text-md); }
+    .credits .list { list-style: none; padding: 0; margin: 0; }
+    .credits .list .credit-row { font-size: var(--text-md); line-height: 1; }
+    .credits .list .credit-row strong { font-weight: 700; text-transform: uppercase; }
+
+    @media (max-width: 1000.5px) {
+        .media-grid { grid-template-columns: repeat(2, minmax(250px, 1fr)); }
+    }
+    @media (max-width: 750.5px) {
+        .media-grid { grid-template-columns: 1fr; gap: var(--md); }
+    }
+</style>
+
 <div class="content project-page-template">
     <div class="heading">
         <h1>{data.content.title}</h1>
@@ -48,5 +78,13 @@ import RichText from "$lib/atoms/RichText.svelte";
                 </div>
             {/if}
         {/each}
+        <div class="media-grid">
+            <div class="item"><img src="http://unsplash.it/400/600?random&gravity=center" alt=""></div>
+            <div class="item"><img src="http://unsplash.it/400/600?random&gravity=center" alt=""></div>
+            <div class="item"><img src="http://unsplash.it/400/600?random&gravity=center" alt=""></div>
+            <div class="item"><img src="http://unsplash.it/400/600?random&gravity=center" alt=""></div>
+            <div class="item"><img src="http://unsplash.it/400/600?random&gravity=center" alt=""></div>
+            <div class="item"><img src="http://unsplash.it/400/600?random&gravity=center" alt=""></div>
+        </div>
     </div>
 </div>

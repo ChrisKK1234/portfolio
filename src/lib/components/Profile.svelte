@@ -1,28 +1,32 @@
 <script>
 import { onMount } from 'svelte';
-    export let data;
+    export let img;
+    export let full_slug;
+    export let color;
+    export let name;
+    export let order;
 
     let media = null;
 
     onMount(() => {
-        if (!data.content.ProfilePicture.filename) {
+        if (!img) {
             media.classList.add('mask');
         }
     });
 </script>
 
-<a href={"/" + (data.full_slug)} draggable="false">
+<a href={"/" + (full_slug)} style={`order: ${order};`} draggable="false">
     <div class="profile">
-        <div class="media" bind:this={media} style:background-color={data.content.ProfileColor.color}>
-            {#if data.content.ProfilePicture.filename}
+        <div class="media" bind:this={media} style:background-color={color}>
+            {#if img}
                 <picture>
-                    <source srcset={data.content.ProfilePicture.filename + "/m/200x200/filters:format(webp):quality(80)"} type="image/webp" />
-                    <img src={data.content.ProfilePicture.filename} alt={data.content.Name} draggable="false" />
+                    <source srcset={img + "/m/200x200/filters:format(webp):quality(80)"} type="image/webp" />
+                    <img src={img} alt={name} draggable="false" />
                 </picture>
             {/if}
         </div>
         <div class="name">
-            <h3>{data.content.ProfileName}</h3>
+            <h3>{name}</h3>
         </div>
     </div>
 </a>

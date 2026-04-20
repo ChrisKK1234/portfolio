@@ -1,7 +1,33 @@
 <script>
     import Profile from "$lib/components/Profile.svelte";
+    import { isMobile } from "$lib/store/device.js";
     export let data;
     console.log('ProfilePage data:', data);
+
+    const profiles = [
+      {
+        name: "Chris",
+        img: "",
+        color: "#FF5733",
+        full_slug: "profiles/chris",
+        order: 1,
+      },
+      {
+        name: "Future boss",
+        img: "",
+        color: "#33FF57",
+        full_slug: "profiles/future-boss",
+        order: 3,
+      },
+      {
+        name: "Oscar",
+        img: "",
+        color: "#33C1FF",
+        full_slug: "profiles/oscar",
+        order: 2,
+      },
+
+    ];
 </script>
 
 <div class="content profiles-template">
@@ -11,10 +37,14 @@
       </div>
 
       <div class="profiles-wrapper">
-        {#each data.stories as story}
-            {#if story.content.component === 'profile-page'}
-                <Profile data={story} />
-            {/if}
+        {#each profiles as profile, i}
+            <Profile
+                name={profile.name}
+                img={profile.img}
+                color={profile.color}
+                full_slug={profile.full_slug}
+                order={$isMobile ? i : i}
+            />
         {/each}
       </div>
       
