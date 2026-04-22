@@ -29,8 +29,6 @@ export async function entries() {
 
   const { docs } = await res.json()
 
-  console.log('project entries:', docs.map(d => d.slug))
-
   return (docs ?? [])
     .filter((d) => d.slug)
     .map((d) => ({ slug: d.slug }))
