@@ -10,24 +10,20 @@ export const load = async ({ fetch }) => {
   const work = await res.json()
   let projects = work.featuredProjects ?? []
 
-  // Populate backgroundMux manuelt
   projects = await Promise.all(projects.map(async (project) => {
     if (typeof project.backgroundMux === 'string') {
-      const muxRes = await fetch(`${PAYLOAD_URL}/api/mux-videos/${project.backgroundMux}`)
-      if (muxRes.ok) project.backgroundMux = await muxRes.json()
+      const r = await fetch(`${PAYLOAD_URL}/api/mux-videos/${project.backgroundMux}`)
+      if (r.ok) project.backgroundMux = await r.json()
     }
-    // Populate mediaMux i fields blocks også
-    if (project.fields) {
-      project.fields = await Promise.all(project.fields.map(async (block) => {
-        if (block.blockType === 'simpleMedia' && typeof block.mediaMux === 'string') {
-          const muxRes = await fetch(`${PAYLOAD_URL}/api/mux-videos/${block.mediaMux}`)
-          if (muxRes.ok) block.mediaMux = await muxRes.json()
-        }
-        return block
-      }))
-    }
+  if (typeof project.backgroundMux === 'string') {
+  const r = await fetch(`${PAYLOAD_URL}/api/mux-videos/${project.backgroundMux}`)
+  console.log('mux fetch status:', r.status, project.backgroundMux)
+  if (r.ok) project.backgroundMux = await r.json()
+}
+    console.log('backgroundMux after fetch:', JSON.stringify(project.backgroundMux))
+    console.log('backgroundType:', project.backgroundType)
     return project
-  }))
+}))
 
   return { work, projects }
 }
