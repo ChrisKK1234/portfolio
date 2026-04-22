@@ -173,10 +173,10 @@
     .top-five-module .background-media .mux-bg.is-visible { opacity: 1; }
     .top-five-module .bottom-shadow { position: absolute; bottom: 0; left: 0; z-index: -1; width: 100%; height: 50%; background: linear-gradient(to top, var(--color-darkest) 0%, transparent 100%); pointer-events: none; }
     .top-five-module .project-title { padding: 0 var(--md); pointer-events: none; user-select: none; }
-    .top-five-module .project-title h2 { font-family: 'geologica-variable', sans-serif; text-transform: uppercase; font-weight: 700; color: var(--color-white); font-size: clamp(var(--text-xl), 10vw, 128px); line-height: 0.9; }
-    .top-five-module .project-title .more-info { display: block; width: fit-content; pointer-events: auto; cursor: pointer; font-family: 'geologica-variable', sans-serif; font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; border: none; outline: none; border-radius: 12px; background-color: rgba(255, 255, 255, 0.3); color: var(--color-white); padding: 2px 20px; padding-bottom: 4px; margin-top: var(--sm); transition: background-color 0.3s; }
+    .top-five-module .project-title h2 { font-family: 'geologica-variable', sans-serif; text-transform: uppercase; font-weight: 700; color: var(--color-white); font-size: clamp(var(--text-xl), 10vw, 128px); line-height: 0.9; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
+    .top-five-module .project-title .more-info { display: block; width: fit-content; pointer-events: auto; cursor: pointer; font-family: 'geologica-variable', sans-serif; font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; border: none; outline: none; border-radius: 12px; background-color: rgba(255, 255, 255, 0.3); color: var(--color-white); padding: 2px 20px; padding-bottom: 4px; margin-top: var(--sm); box-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); transition: background-color 0.3s; }
     .top-five-module .projects-list-container { display: flex; flex-direction: column; gap: var(--sm); }
-    .top-five-module .projects-list-container .sub-title { padding: 0 var(--md); line-height: 1; }
+    .top-five-module .projects-list-container .sub-title { padding: 0 var(--md); line-height: 1; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
     .list { display: flex; flex-direction: row; justify-content: space-between; gap: var(--sm); width: 100%; height: 206px; box-sizing: content-box; padding: var(--sm) 0; overflow-x: auto; overflow-y: hidden; }
     .list .padding-x { padding: 0 var(--md); display: flex; gap: var(--sm); }
     .list .project { position: relative; height: 100%; display: flex; flex-direction: row; align-items: end; }
