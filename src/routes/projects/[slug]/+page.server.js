@@ -20,13 +20,16 @@ export const load = async ({ params, fetch }) => {
 
 // Generer alle slugs til prerendering
 export async function entries() {
+  const url = process.env.PAYLOAD_URL
   const res = await fetch(
-    `${PAYLOAD_URL}/api/projects?limit=100&select=slug`
+    `${url}/api/projects?limit=100&select=slug`
   )
 
   if (!res.ok) return []
 
   const { docs } = await res.json()
+
+  console.log('project entries:', docs.map(d => d.slug))
 
   return (docs ?? [])
     .filter((d) => d.slug)
