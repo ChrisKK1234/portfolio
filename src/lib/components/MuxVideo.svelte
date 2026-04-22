@@ -1,5 +1,6 @@
 <script>
   import { onMount, createEventDispatcher } from 'svelte'
+  import { isMobile } from '$lib/store/device.js'
 
   export let playbackId
   export let hasAudio = false
@@ -24,6 +25,7 @@
   export function restart() {
     if (!videoEl) return
     videoEl.loop = true
+    videoEl.muted = $isMobile || muted
     videoEl.currentTime = 0
     videoEl.play().catch(() => {})
   }
