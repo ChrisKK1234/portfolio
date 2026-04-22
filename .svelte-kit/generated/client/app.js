@@ -9,11 +9,13 @@ export const nodes = [
 	() => import('./nodes/5')
 ];
 
-export const server_loads = [2];
+export const server_loads = [0];
 
 export const dictionary = {
-		"/404": [4],
-		"/[...slug]": [~5,[2],[3]]
+		"/": [~2],
+		"/profiles/[slug]": [~3],
+		"/projects/[slug]": [~4],
+		"/work": [~5]
 	};
 
 export const hooks = {

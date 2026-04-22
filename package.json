@@ -26,6 +26,7 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
+		"@mux/mux-player": "^3.11.8",
 		"@storyblok/svelte": "^5.2.15"
 	}
 }

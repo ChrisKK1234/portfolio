@@ -29,16 +29,20 @@ declare module "$app/types" {
 	type MatcherParam<M> = M extends (param : string) => param is (infer U extends string) ? U : string;
 
 	export interface AppTypes {
-		RouteId(): "/" | "/404" | "/[...slug]";
+		RouteId(): "/" | "/profiles" | "/profiles/[slug]" | "/projects" | "/projects/[slug]" | "/work";
 		RouteParams(): {
-			"/[...slug]": { slug: string }
+			"/profiles/[slug]": { slug: string };
+			"/projects/[slug]": { slug: string }
 		};
 		LayoutParams(): {
 			"/": { slug?: string };
-			"/404": Record<string, never>;
-			"/[...slug]": { slug: string }
+			"/profiles": { slug?: string };
+			"/profiles/[slug]": { slug: string };
+			"/projects": { slug?: string };
+			"/projects/[slug]": { slug: string };
+			"/work": Record<string, never>
 		};
-		Pathname(): "/" | "/404" | `/${string}` & {} | `/${string}/` & {};
+		Pathname(): "/" | `/profiles/${string}` & {} | `/profiles/${string}/` & {} | `/projects/${string}` & {} | `/projects/${string}/` & {} | "/work";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/favicon.svg" | "/robots.txt" | string & {};
 	}

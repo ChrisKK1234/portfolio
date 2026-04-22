@@ -1,9 +1,19 @@
 {
-	"/": [],
-	"/404": [],
-	"/[...slug]": [
-		"src/routes/[...slug]/+page.server.js",
-		"src/routes/[...slug]/+layout.server.js",
-		"src/routes/[...slug]/+layout.server.js"
+	"/": [
+		"src/routes/+page.server.js",
+		"src/routes/+layout.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/profiles/[slug]": [
+		"src/routes/profiles/[slug]/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/projects/[slug]": [
+		"src/routes/projects/[slug]/+page.server.js",
+		"src/routes/+layout.server.js"
+	],
+	"/work": [
+		"src/routes/work/+page.server.js",
+		"src/routes/+layout.server.js"
 	]
 }
