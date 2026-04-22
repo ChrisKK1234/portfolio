@@ -1,6 +1,7 @@
 <!-- Work page -->
 <script>
     import { isMobile } from "$lib/store/device";
+    import { browser } from '$app/environment'
     import { goto } from "$app/navigation";
     import { onMount, onDestroy } from "svelte";
     import MuxVideo from "$lib/components/MuxVideo.svelte";
@@ -198,7 +199,7 @@
         </button>
     {/if}
     <div class="background-media">
-        {#if isMuxBackground}
+        {#if isMuxBackground && browser}
             <div class="mux-bg">
                 <MuxVideo
                     playbackId={activeProject.backgroundMux.playbackId}
