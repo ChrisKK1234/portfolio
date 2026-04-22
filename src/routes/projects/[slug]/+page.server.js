@@ -1,3 +1,4 @@
+// Project
 import { error } from '@sveltejs/kit'
 import { PAYLOAD_URL } from '$env/static/private'
 
@@ -20,9 +21,8 @@ export const load = async ({ params, fetch }) => {
 
 // Generer alle slugs til prerendering
 export async function entries() {
-  const url = process.env.PAYLOAD_URL
   const res = await fetch(
-    `${url}/api/projects?limit=100&select=slug`
+    `${PAYLOAD_URL}/api/projects?limit=100`
   )
 
   if (!res.ok) return []
