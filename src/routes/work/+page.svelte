@@ -10,6 +10,8 @@
     const { projects } = data;
 
     let videoMuted = true;
+    let muxVisible = false;  // styrer fade på mux baggrund
+    let muxVideoRefs = {}
 
     let activeProject = projects?.[0] ?? null;
     let slots = [
@@ -24,6 +26,9 @@
     $: projectTitle = activeProject?.title ?? 'Projects';
     $: projectSlug = activeProject?.slug ? `/projects/${activeProject.slug}` : '#';
     $: isMuxBackground = activeProject?.backgroundType === 'mux' && activeProject?.backgroundMux?.playbackId;
+
+    // Når activeProject skifter til mux, nulstil muxVisible
+    $: if (isMuxBackground) muxVisible = false;
 
     function getProjectBackground(project) {
         if (!project || project.backgroundType === 'mux') return '';
@@ -40,8 +45,17 @@
     }
 
     function switchBackground(project) {
-        activeProject = project ?? null;
-        if (project?.backgroundType === 'mux') return;
+        // Pause den forrige mux video
+        if (activeProject?.backgroundType === 'mux' && activeProject?.id !== project?.id) {
+            muxVideoRefs[activeProject.id]?.pause()
+        }
+
+        activeProject = project ?? null
+        if (project?.backgroundType === 'mux') {
+            muxVisible = false
+            setTimeout(() => muxVideoRefs[project.id]?.restart(), 50)
+            return
+        }
         const nextSrc = getProjectBackground(project);
         if (!nextSrc || nextSrc === slots[activeSlot].src) return;
         const prevSlot = activeSlot;
@@ -52,6 +66,10 @@
         activeSlot = nextSlot;
         clearTimeout(fadeTimer);
         fadeTimer = setTimeout(() => { slots[prevSlot].visible = false; slots = slots; }, 0);
+    }
+
+    function handleMuxPlaying() {
+        muxVisible = true
     }
 
     function scheduleBackgroundSwitch(project) {
@@ -71,8 +89,10 @@
     let currentIndex = 0, visibleIndex = 0;
 
     onMount(() => {
+        if (activeProject?.backgroundType === 'mux') {
+            setTimeout(() => muxVideoRefs[activeProject.id]?.restart(), 200)
+        }
         if (!$isMobile) return;
-        console.log('onMount', track, sliderContainer);
         items = [...track.children];
         measure();
         requestAnimationFrame(() => goToIndex(0, true));
@@ -149,7 +169,8 @@
     .top-five-module .background-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
     .top-five-module .background-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 450ms ease; will-change: opacity; }
     .top-five-module .background-media img.is-visible { opacity: 1; }
-    .top-five-module .background-media .mux-bg { position: absolute; inset: 0; }
+    .top-five-module .background-media .mux-bg { position: absolute; inset: 0; opacity: 0; transition: opacity 450ms ease; }
+    .top-five-module .background-media .mux-bg.is-visible { opacity: 1; }
     .top-five-module .bottom-shadow { position: absolute; bottom: 0; left: 0; z-index: -1; width: 100%; height: 50%; background: linear-gradient(to top, var(--color-darkest) 0%, transparent 100%); pointer-events: none; }
     .top-five-module .project-title { padding: 0 var(--md); pointer-events: none; user-select: none; }
     .top-five-module .project-title h2 { font-family: 'geologica-variable', sans-serif; text-transform: uppercase; font-weight: 700; color: var(--color-white); font-size: clamp(var(--text-xl), 10vw, 128px); line-height: 0.9; }
@@ -170,7 +191,6 @@
     .slider-container .track .project .number { width: 100%; height: 62%; font-family: 'geologica-variable', sans-serif; font-size: 275px; line-height: 0; font-weight: 700; -webkit-text-stroke: 2px var(--color-white); color: transparent; pointer-events: none; }
     .slider-container .track .project .media { display: block; width: 140px; flex-shrink: 0; height: 98%; border-radius: 8px; overflow: hidden; transform-origin: left center; transform: translate(-40px, -2px); }
     .slider-container .track .project .media img { width: 100%; height: 100%; object-fit: cover; }
-
     .mute-btn { position: absolute; top: 50%; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; cursor: pointer; pointer-events: auto; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
     .mute-btn:hover { background: rgba(0,0,0,0.75); }
     @media (min-width: 750.5px) {
@@ -199,20 +219,26 @@
         </button>
     {/if}
     <div class="background-media">
-        {#if isMuxBackground && browser}
-            <div class="mux-bg">
-                <MuxVideo
-                    playbackId={activeProject.backgroundMux.playbackId}
-                    hasAudio={!activeProject.backgroundMuted}
-                    cover={true}
-                    bind:muted={videoMuted}
-                />
-            </div>
-        {:else}
-            {#each slots as slot}
-                {#if slot.src}
-                    <img draggable="false" src={slot.src} alt="Project background" class:is-visible={slot.visible} />
-                {/if}
+        <!-- Billede slots – altid mounted -->
+        {#each slots as slot}
+            {#if slot.src}
+                <img draggable="false" src={slot.src} alt="Project background" class:is-visible={slot.visible && !isMuxBackground} />
+            {/if}
+        {/each}
+        <!-- Mux – altid mounted når browser, opacity styres af muxVisible -->
+        {#if browser}
+            {#each projects.filter(p => p.backgroundType === 'mux' && p.backgroundMux?.playbackId) as project (project.id)}
+                <div class="mux-bg" class:is-visible={isMuxBackground && muxVisible && activeProject?.id === project.id}>
+                    <MuxVideo
+                        playbackId={project.backgroundMux.playbackId}
+                        hasAudio={!project.backgroundMuted}
+                        cover={true}
+                        bind:muted={videoMuted}
+                        bind:this={muxVideoRefs[project.id]}
+                        autoplayWithViewport={false}
+                        on:videoPlaying={handleMuxPlaying}
+                    />
+                </div>
             {/each}
         {/if}
     </div>
