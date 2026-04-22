@@ -8,15 +8,16 @@
 
   const { orderedItems } = data
 
-  let showLanding = false
+  // Start med sort overlay – fjernes hvis intern navigation
+  let showLanding = true
+  let landingChecked = false
 
   onMount(() => {
     const cameFromInternal = sessionStorage.getItem('internal_nav') === 'true'
-    if (!cameFromInternal) {
-      showLanding = true
+    if (cameFromInternal) {
+      showLanding = false
     }
-    // Flaget ryddes IKKE her – beforeNavigate i layout sætter det ved næste navigation
-    // Ved direkte visit (refresh/ekstern) er flaget aldrig sat så landing vises
+    landingChecked = true
   })
 
   function handleLandingDone() {
@@ -29,8 +30,10 @@
   }
 </script>
 
-{#if showLanding}
+{#if showLanding && landingChecked}
   <LandingExperience on:done={handleLandingDone} />
+{:else if !landingChecked}
+  <div style="position:fixed;inset:0;background:#000;z-index:1000;"></div>
 {/if}
 
 <div class="content profiles-template">

@@ -89,6 +89,7 @@
         aria-label="Profil menu"
         style={!avatarUrl ? `background-color: ${avatarColor}` : ''}
       >
+        <span class="overlay"></span>
         {#if avatarUrl}
           <img src={avatarUrl} alt={activeName ?? ''} draggable="false" />
         {/if}
@@ -191,7 +192,7 @@
   .avatar-btn { position: relative; width: auto; height: 100%; max-height: 100%; aspect-ratio: 1/1; border-radius: var(--rounded-xs); border: none; cursor: pointer; overflow: hidden; padding: 0; flex-shrink: 0; }
   .avatar-btn img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .avatar-btn .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%); opacity: 1; transition: opacity 0.15s; }
-  .avatar-btn:hover .overlay { opacity: 0; }
+  .avatar-btn:hover .overlay { opacity: 0.25; }
 
   .dropdown { position: absolute; top: calc(100% + 10px); right: 0; min-width: 220px; background: var(--color-darkest, #111); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden; z-index: 100; }
   .dropdown-current { display: flex; align-items: center; gap: 10px; padding: 14px 16px; }
