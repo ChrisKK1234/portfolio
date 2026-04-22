@@ -52,6 +52,7 @@
             setupViewport()
         } else {
             videoEl?.play().catch(() => {})
+        }
       })
     } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
       videoEl.src = src
