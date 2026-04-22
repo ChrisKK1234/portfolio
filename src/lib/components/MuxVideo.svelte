@@ -50,7 +50,8 @@
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         if (autoplayWithViewport) {
             setupViewport()
-        }
+        } else {
+            videoEl?.play().catch(() => {})
       })
     } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
       videoEl.src = src

@@ -12,6 +12,12 @@
     let videoMuted = true;
     let muxVisible = false;  // styrer fade på mux baggrund
     let muxVideoRefs = {}
+    let initialStarted = false
+
+    $: if (!initialStarted && muxVideoRefs[activeProject?.id]) {
+        initialStarted = true
+        setTimeout(() => muxVideoRefs[activeProject.id]?.restart(), 100)
+    }
 
     let activeProject = projects?.[0] ?? null;
     let slots = [
@@ -89,10 +95,9 @@
     let currentIndex = 0, visibleIndex = 0;
 
     onMount(() => {
-        console.log('isMobile:', $isMobile, 'activeProject:', activeProject?.backgroundType)
-        if (activeProject?.backgroundType === 'mux') {
-            setTimeout(() => muxVideoRefs[activeProject.id]?.restart(), 200)
-        }
+        // if (activeProject?.backgroundType === 'mux') {
+        //     setTimeout(() => muxVideoRefs[activeProject.id]?.restart(), 200)
+        // }
         if (!$isMobile) return;
         items = [...track.children];
         measure();
