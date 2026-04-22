@@ -43,7 +43,7 @@
 </script>
 
 <style>
-  .duo-info { align-content: center; min-height: 100svh; padding: calc(var(--md) * 3) 0; }
+  .duo-info { align-content: start; min-height: 100svh; padding: calc(var(--md) * 3) 0; }
   .duo-info .wrapper { width: 100%; }
   .duo-info .wrapper .title { color: var(--color-white); line-height: 1; margin: auto; margin-bottom: var(--lg); }
   .duo-info .wrapper .bio-wrapper { width: 100%; margin: auto; max-width: 910px; display: flex; gap: var(--md); justify-content: space-between; margin-top: 2rem; }
