@@ -184,7 +184,7 @@
 </script>
 
 <style>
-    .top-five-module { position: absolute; top: 0; left: 0; width: 100%; height: 100svh; display: flex; flex-direction: column; justify-content: end; gap: var(--sm); text-align: left; overflow: hidden; }
+    .top-five-module { position: absolute; top: 0; left: 0; width: 100%; height: 100svh; display: flex; flex-direction: column; justify-content: end; gap: var(--md); text-align: left; overflow: hidden; }
     .top-five-module .background-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
     .top-five-module .background-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 450ms ease; will-change: opacity; }
     .top-five-module .background-media img.is-visible { opacity: 1; }
@@ -194,7 +194,7 @@
     .top-five-module .project-title { padding: 0 var(--md); pointer-events: none; user-select: none; }
     .top-five-module .project-title h2 { font-family: 'geologica-variable', sans-serif; text-transform: uppercase; font-weight: 700; color: var(--color-white); font-size: clamp(var(--text-xl), 10vw, 128px); line-height: 0.9; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
     .top-five-module .project-title .more-info { display: block; width: fit-content; pointer-events: auto; cursor: pointer; font-family: 'geologica-variable', sans-serif; font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; border: none; outline: none; border-radius: 12px; background-color: rgba(255, 255, 255, 0.3); color: var(--color-white); padding: 2px 20px; padding-bottom: 4px; margin-top: var(--sm); box-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); transition: background-color 0.3s; }
-    .top-five-module .projects-list-container { display: flex; flex-direction: column; gap: var(--sm); }
+    .top-five-module .projects-list-container { display: flex; flex-direction: column; gap: 0; }
     .top-five-module .projects-list-container .sub-title { padding: 0 var(--md); line-height: 1; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
     .list { display: flex; flex-direction: row; justify-content: space-between; gap: var(--sm); width: 100%; height: 206px; box-sizing: content-box; padding: var(--sm) 0; overflow-x: auto; overflow-y: hidden; }
     .list .padding-x { padding: 0 var(--md); display: flex; gap: var(--sm); }
