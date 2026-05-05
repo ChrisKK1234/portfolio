@@ -65,7 +65,7 @@
       {/each}
     </div>
 
-    <button class="m more-ads btn" on:click={() => goto('/contact')}>
+    <button class=" more-ads btn" on:click={() => goto('/contact')}>
       <div class="text">
         <h4>Subscribe for more ads</h4>
       </div>
