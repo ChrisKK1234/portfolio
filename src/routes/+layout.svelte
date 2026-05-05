@@ -163,6 +163,7 @@
     transform: translateY(-4px);
     transition: opacity 0.15s, transform 0.15s;
     z-index: 100;
+    text-transform: uppercase;
   }
 
   .avatar-wrapper:hover .dropdown {
