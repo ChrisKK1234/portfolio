@@ -2,11 +2,25 @@
 <script>
   import RichText from '$lib/atoms/RichText.svelte'
   import MuxVideo from '$lib/components/MuxVideo.svelte'
+  import { isMobile } from '$lib/store/device.js'
 
   export let data
-  const { project } = data
+  const { project, awardTypes } = data
+  console.log('ProjectPage data:', data)
 
   let videoMuted = true
+
+  $: projectAwards = getProjectAwards()
+
+  function getProjectAwards() {
+      if (!project?.awards?.length || !awardTypes?.length) return []
+      return project.awards
+          .map(id => awardTypes.find(a => a.id === id))
+          .filter(Boolean)
+  }
+  function getAwardImageUrl(award) {
+      return award?.image?.cloudinary?.secure_url ?? award?.image?.url ?? ''
+  }
 
   function getMediaUrl(media, width = 1600) {
     if (!media) return ''
@@ -20,7 +34,11 @@
   .m-gap > * { margin-bottom: var(--m-gap); }
   .m-gap > :last-of-type { margin-bottom: var(--md); }
   .project-page-template.content { padding: 0 var(--md); padding-top: calc(var(--md) * 3); color: var(--color-white); padding-bottom: var(--md); text-align: center; }
-  .project-page-template.content .heading { width: fit-content; margin: 0 auto; line-height: 0.9; margin-bottom: var(--m-gap); }
+  .project-page-template.content .heading { width: 100%; margin-bottom: var(--m-gap); display: flex; gap: var(--sm); justify-content: center; }
+  .project-page-template.content .heading h1 { max-width: 750px; width: auto; line-height: 0.9; }
+  .project-page-template.content .heading .awards { width: fit-content; height: fit-content; display: flex; flex-direction: row; gap: var(--xs); flex-wrap: wrap; }
+  .project-page-template.content .awards img { width: 50px; height: 50px; object-fit: contain; }
+
   .text-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--md); }
   .text-columns .column { text-align: left;}
   .simple-media { width: 100%; height: auto; max-height: 90svh; overflow: hidden; }
@@ -30,10 +48,11 @@
   .media-grid .item { width: 100%; height: auto; overflow: hidden; }
   .media-grid .item img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .credits { text-align: left; }
-  .credits .recognition { line-height: 1; padding-bottom: var(--md); }
-  .credits .awards { font-size: var(--text-md); }
+  .credits .recognition { font-size: var(--text-sm); line-height: 1; padding-bottom: var(--md); }
+  .credits .recognition h3 { font-size: var(--text-sm); }
+  .credits .awards { font-size: var(--text-sm); }
   .credits .list { list-style: none; padding: 0; margin: 0; }
-  .credits .list .credit-row { font-size: var(--text-md); line-height: 1; }
+  .credits .list .credit-row { font-size: var(--text-sm); line-height: 1; }
   .credits .list .credit-row strong { font-weight: 700; text-transform: uppercase; }
   .mute-btn { position: absolute; bottom: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; z-index: 10; }
   .mute-btn:hover { background: rgba(0,0,0,0.75); }
@@ -41,12 +60,30 @@
   @media (max-width: 750.5px) {
     .media-grid { grid-template-columns: 1fr; gap: var(--md); }
     .text-columns .column { text-align: center; max-width: 400px; margin: auto;}
+    .project-page-template.content .heading { flex-direction: column; }
+    .project-page-template.content .heading .awards { margin: auto; justify-content: center; }
   }
 </style>
 
 <div class="content project-page-template">
   <div class="heading">
+  {#if !$isMobile}
+    <div class="awards" style="opacity: 0;">
+      {#each projectAwards as award}
+        <div class="award">
+            <img src={getAwardImageUrl(award)} alt={award.name} />
+        </div>
+    {/each}
+    </div>
+  {/if}
     <h1>{project.title}</h1>
+    <div class="awards">
+      {#each projectAwards as award}
+        <div class="award">
+            <img src={getAwardImageUrl(award)} alt={award.name} />
+        </div>
+    {/each}
+    </div>
   </div>
   <div class="blocks m-gap">
     {#each project.fields ?? [] as block}

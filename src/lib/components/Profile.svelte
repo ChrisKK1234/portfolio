@@ -1,4 +1,5 @@
 <script>
+  import defaultImg from '$lib/assets/svg/default.svg'
   import { onMount } from 'svelte'
 
   export let img
@@ -25,15 +26,22 @@
   })
 </script>
 
+<style>
+  .profile .media.default-img img { background-color: transparent; opacity: 0.5; width: 30%; object-fit: contain; }
+  .profile .media { transform-origin: center; transition: transform 0.3s ease; }
+
+  @media (min-width: 750px) {
+    .profile:hover .media { transform: scale(0.98); }
+  }
+</style>
+
 <a href={"/" + full_slug} style={`order: ${order};`} draggable="false">
   <div class="profile">
-    <div class="media" bind:this={media} style:background-color={color}>
-      {#if img}
+    <div class="media" class:default-img={img ? false : true} bind:this={media} style:background-color={color}>
         <picture>
           <source srcset={imgWebp} type="image/webp" />
-          <img src={img} alt={name} draggable="false" />
+          <img src={img ? img : defaultImg} alt={name} draggable="false" />
         </picture>
-      {/if}
     </div>
     <div class="name">
       <h3>{name}</h3>

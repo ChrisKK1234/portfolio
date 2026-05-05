@@ -7,7 +7,9 @@
     import MuxVideo from "$lib/components/MuxVideo.svelte";
 
     export let data;
-    const { projects } = data;
+    const { projects, awardTypes } = data;
+
+    console.log('WorkPage data:', data);
 
     let videoMuted = true;
     let muxVisible = false;  // styrer fade på mux baggrund
@@ -35,6 +37,17 @@
 
     // Når activeProject skifter til mux, nulstil muxVisible
     $: if (isMuxBackground) muxVisible = false;
+
+    function getProjectAwards(project) {
+        if (!project?.awards?.length || !awardTypes?.length) return []
+        return project.awards
+            .map(id => awardTypes.find(a => a.id === id))
+            .filter(Boolean)
+    }
+
+    function getAwardImageUrl(award) {
+        return award.image?.cloudinary?.secure_url ?? award.image?.url ?? ''
+    }
 
     function getProjectBackground(project) {
         if (!project || project.backgroundType === 'mux') return '';
@@ -199,6 +212,9 @@
     .slider-container .track .project .media img { width: 100%; height: 100%; object-fit: cover; }
     .mute-btn { position: absolute; top: 50%; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; cursor: pointer; pointer-events: auto; display: flex; align-items: center; justify-content: center; transition: background 0.15s; }
     .mute-btn:hover { background: rgba(0,0,0,0.75); }
+    .media .awards { position: absolute; bottom: 8px; right: 8px; right: 8px; display: flex; flex-direction: row-reverse; gap: 4px; pointer-events: none; }
+    .media .awards .award { width: auto; height: auto; max-width: 24px; max-height: 24px; }
+    .media .awards .award img { object-fit: contain; }
     @media (min-width: 750.5px) {
         .top-five-module .project-title .more-info:hover { background-color: rgba(255, 255, 255, 0.5); }
         .list .project:hover .number { -webkit-text-stroke: 4px var(--color-white); }
@@ -261,7 +277,16 @@
                     {#each projects as project, index}
                         <div class="project">
                             <div class="number"><span>{index + 1}</span></div>
-                            <div class="media"><img src={getThumbnailUrl(project)} alt={project.title} draggable="false"/></div>
+                            <div class="media">
+                                <img src={getThumbnailUrl(project)} alt={project.title} draggable="false"/>
+                                <div class="awards">
+                                    {#each getProjectAwards(project) as award}
+                                        <div class="award">
+                                            <img src={getAwardImageUrl(award)} alt={award.name} />
+                                        </div>
+                                    {/each}
+                                </div>
+                            </div>
                         </div>
                     {/each}
                 </div>
@@ -273,7 +298,16 @@
                         <button role="button" tabindex="0" aria-label="button" on:click={() => goto(`/projects/${project.slug}`)} on:mouseenter={() => scheduleBackgroundSwitch(project)} on:mouseleave={clearScheduledBackgroundSwitch}>
                             <div class="project">
                                 <div class="number"><span>{index + 1}</span></div>
-                                <div class="media"><img src={getThumbnailUrl(project)} alt={project.title} draggable="false"/></div>
+                                <div class="media">
+                                    <img src={getThumbnailUrl(project)} alt={project.title} draggable="false"/>
+                                    <div class="awards">
+                                        {#each getProjectAwards(project) as award}
+                                            <div class="award">
+                                                <img src={getAwardImageUrl(award)} alt={award.name} />
+                                            </div>
+                                        {/each}
+                                    </div>
+                                </div>
                             </div>
                         </button>
                     {/each}

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import { goto } from '$app/navigation'
   import Profile from '$lib/components/Profile.svelte'
   import LandingExperience from '$lib/components/LandingExperience.svelte'
   import { isMobile } from '$lib/store/device.js'
@@ -9,7 +10,7 @@
   const { orderedItems } = data
 
   // Start med sort overlay – fjernes hvis intern navigation
-  let showLanding = true
+  let showLanding = false
   let landingChecked = false
 
   onMount(() => {
@@ -64,10 +65,10 @@
       {/each}
     </div>
 
-    <div class="m more-ads">
+    <button class="m more-ads btn" on:click={() => goto('/contact')}>
       <div class="text">
         <h4>Subscribe for more ads</h4>
       </div>
-    </div>
+    </button>
   </div>
 </div>

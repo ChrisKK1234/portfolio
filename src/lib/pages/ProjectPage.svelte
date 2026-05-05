@@ -21,9 +21,8 @@ import RichText from "$lib/atoms/RichText.svelte";
     .media-grid .item img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
     .credits .recognition { line-height: 1; padding-bottom: var(--md); }
-    .credits .awards { font-size: var(--text-md); }
     .credits .list { list-style: none; padding: 0; margin: 0; }
-    .credits .list .credit-row { font-size: var(--text-md); line-height: 1; }
+    .credits .list li { font-size: 6px; line-height: 1; }
     .credits .list .credit-row strong { font-weight: 700; text-transform: uppercase; }
 
     @media (max-width: 1000.5px) {
@@ -70,11 +69,11 @@ import RichText from "$lib/atoms/RichText.svelte";
                         <h3 class="title">{block.recognition}</h3>
                         <p class="awards">{block.text}</p>
                     </div>
-                    <ul class="list">
+                    <!-- <ul class="list">
                         {#each block.list as creditRow}
-                        <li class="credit-row"><strong>{creditRow.role}:</strong> {creditRow.names}</li>
+                        <li class="credit-row" style="font-size: 6px; line-height: 1;"><strong>{creditRow.role}:</strong> {creditRow.names}</li>
                         {/each}
-                    </ul>
+                    </ul> -->
                 </div>
             {/if}
         {/each}
