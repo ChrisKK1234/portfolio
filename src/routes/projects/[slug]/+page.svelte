@@ -124,10 +124,14 @@
                 {/if}
             </div>
           {:else if block.mediaMedia}
-            <picture>
-              <source srcset="{getMediaUrl(block.mediaMedia, 400)} 400w, {getMediaUrl(block.mediaMedia, 800)} 800w, {getMediaUrl(block.mediaMedia, 1600)} 1600w" sizes="100vw" type="image/webp" />
-              <img loading="lazy" draggable="false" src={getMediaUrl(block.mediaMedia, 1600)} alt={block.mediaMedia?.alt ?? ''} />
-            </picture>
+            <img
+              loading="lazy"
+              draggable="false"
+              srcset="{getMediaUrl(block.mediaMedia, 400)} 400w, {getMediaUrl(block.mediaMedia, 800)} 800w, {getMediaUrl(block.mediaMedia, 1600)} 1600w"
+              sizes="100vw"
+              src={getMediaUrl(block.mediaMedia, 1600)}
+              alt={block.mediaMedia?.alt ?? ''}
+            />
           {/if}
         </div>
 
