@@ -64,6 +64,8 @@ p{margin:0;padding:0; color: var(--color-white);}
 .content { width: min(100%, var(--content-max-width)); margin: auto; }
 .m { width: min(100%, var(--md-max-width)); margin: auto; padding-bottom: var(--xl); }
 
+.back-btn { text-transform: uppercase;}
+
 .profiles-template { position: relative; color: var(--color-white); height: 100svh; max-height: 100svh; align-content: center; text-align: center; overflow: hidden; padding: var(--sm); }
 .profiles-template .center-wrapper { margin: auto; width: fit-content; text-align: center; display: flex; flex-direction: column; gap: var(--lg); align-items: center; }
 .profiles-template .center-wrapper .heading { width: fit-content; margin: 0 auto;}
