@@ -184,7 +184,7 @@
 </script>
 
 <style>
-    .top-five-module { position: absolute; top: 0; left: 0; width: 100%; height: 100svh; display: flex; flex-direction: column; justify-content: end; gap: var(--md); text-align: left; overflow: hidden; }
+    .top-five-module { position: absolute; top: 0; left: 0; width: 100%; height: 100svh; display: flex; flex-direction: column; justify-content: end; gap: var(--lg); text-align: left; overflow: hidden; }
     .top-five-module .background-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
     .top-five-module .background-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 450ms ease; will-change: opacity; }
     .top-five-module .background-media img.is-visible { opacity: 1; }
