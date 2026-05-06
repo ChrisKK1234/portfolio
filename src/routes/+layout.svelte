@@ -50,8 +50,8 @@
   <div class="nav-right">
     {#if isProject}
       <a href="/work" class="back-btn">Back</a>
-    <!-- {:else if isProfile}
-      <a href="/" class="back-btn">Back</a> -->
+    {:else if isProfile}
+      <a href="/" class="back-btn">Back</a>
     {/if}
     {#if !isHome}
       <div class="avatar-wrapper">
