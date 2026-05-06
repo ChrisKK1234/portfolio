@@ -11,7 +11,7 @@
   let media = null
 
   // Cloudinary URL transformation – resize til 200x200 webp
-  function getCloudinaryUrl(url, width = 200, height = 200) {
+  function getCloudinaryUrl(url, width = 500, height = 500) {
     if (!url) return null
     // Indsæt transformation efter /upload/
     return url.replace('/upload/', `/upload/w_${width},h_${height},c_fill,f_webp,q_80/`)
