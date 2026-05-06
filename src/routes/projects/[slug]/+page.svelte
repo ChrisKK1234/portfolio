@@ -127,8 +127,6 @@
             <img
               loading="lazy"
               draggable="false"
-              srcset="{getMediaUrl(block.mediaMedia, 400)} 400w, {getMediaUrl(block.mediaMedia, 800)} 800w, {getMediaUrl(block.mediaMedia, 1600)} 1600w"
-              sizes="100vw"
               src={getMediaUrl(block.mediaMedia, 1600)}
               alt={block.mediaMedia?.alt ?? ''}
             />
