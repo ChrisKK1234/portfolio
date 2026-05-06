@@ -17,7 +17,7 @@
     return url.replace('/upload/', `/upload/w_${width},h_${height},c_fill,f_webp,q_80/`)
   }
 
-  const imgWebp = img ? getCloudinaryUrl(img, 220, 220) : null
+  const imgWebp = img ? getCloudinaryUrl(img) : null
 
   onMount(() => {
     if (!img) {
