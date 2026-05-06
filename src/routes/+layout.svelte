@@ -19,6 +19,7 @@
   })
   $: isProject = $page.url.pathname.startsWith('/projects/')
   $: isProfile = $page.url.pathname.startsWith('/profiles/')
+  $: isContact = $page.url.pathname.startsWith('/contact')
 
   $: activeProfile = (() => {
     const match = $page.url.pathname.match(/^\/profiles\/([^/]+)/)
@@ -50,7 +51,7 @@
   <div class="nav-right">
     {#if isProject}
       <a href="/work" class="back-btn">Back</a>
-    {:else if isProfile}
+    {:else if isProfile || isContact}
       <a href="/" class="back-btn">Back</a>
     {/if}
     {#if !isHome}
