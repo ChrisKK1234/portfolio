@@ -192,7 +192,7 @@
     .top-five-module .background-media .mux-bg.is-visible { opacity: 1; }
     .top-five-module .bottom-shadow { position: absolute; bottom: 0; left: 0; z-index: -1; width: 100%; height: 50%; background: linear-gradient(to top, var(--color-darkest) 0%, transparent 100%); pointer-events: none; }
     .top-five-module .project-title { padding: 0 var(--md); pointer-events: none; user-select: none; }
-    .top-five-module .project-title h2 { font-family: 'geologica-variable', sans-serif; text-transform: uppercase; font-weight: 700; color: var(--color-white); font-size: clamp(var(--text-xl), 10vw, 128px); line-height: 0.9; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
+    .top-five-module .project-title h2 { max-width: 80%; width: 100%; font-family: 'geologica-variable', sans-serif; text-transform: uppercase; font-weight: 700; color: var(--color-white); font-size: clamp(var(--text-xl), 10vw, 72px); line-height: 0.9; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
     .top-five-module .project-title .more-info { display: block; width: fit-content; pointer-events: auto; cursor: pointer; font-family: 'geologica-variable', sans-serif; font-size: var(--text-sm); font-weight: 700; text-transform: uppercase; border: none; outline: none; border-radius: 12px; background-color: rgba(255, 255, 255, 0.3); color: var(--color-white); padding: 2px 20px; padding-bottom: 4px; margin-top: var(--sm); box-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); transition: background-color 0.3s; }
     .top-five-module .projects-list-container { display: flex; flex-direction: column; gap: 0; }
     .top-five-module .projects-list-container .sub-title { padding: 0 var(--md); line-height: 1; text-shadow: 0 0px 16px rgba(0, 0, 0, 0.2); }
@@ -219,6 +219,9 @@
         .top-five-module .project-title .more-info:hover { background-color: rgba(255, 255, 255, 0.5); }
         .list .project:hover .number { -webkit-text-stroke: 4px var(--color-white); }
         .list .project:hover .media { transform: translate(-40px, -2px) scale(1.1); }
+    }
+    @media (max-width: 750.5px) {
+        .top-five-module .project-title h2 { max-width: none; }
     }
 </style>
 
@@ -270,7 +273,7 @@
         <a class="more-info" href={projectSlug}>More info</a>
     </div>
     <div class="projects-list-container">
-        <h3 class="sub-title">Top 5 picks for you</h3>
+        <h3 class="sub-title">Top {projects?.length || 0} picks for you</h3>
         {#if $isMobile}
             <div class="slider-container" class:visible={projects && projects.length > 0} bind:this={sliderContainer} aria-label="carousel" role="region" on:pointerdown={onPointerDown} on:pointermove={onPointerMove} on:pointerup={onPointerUp} on:pointerleave={onPointerUp} on:pointercancel={onPointerUp}>
                 <div class="track" bind:this={track}>
