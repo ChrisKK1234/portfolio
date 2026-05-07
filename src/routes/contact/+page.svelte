@@ -5,6 +5,7 @@
 
   export let data
   const { contact } = data
+  console.log('Contact data:', contact)
 </script>
 
 <style>
@@ -12,7 +13,7 @@
   .duo-info .wrapper { width: 100%; }
   .duo-info .wrapper .title { width: fit-content; color: var(--color-white); font-weight: 900; line-height: 1; margin: auto; margin-bottom: var(--xl); }
 
-  .duo-info .wrapper .contact-wrapper { display: flex; gap: var(--md); justify-content: space-between; flex-wrap: wrap; width: 100%; max-width: 710px; margin: auto; }
+  .duo-info .wrapper .contact-wrapper { display: flex; gap: var(--md); justify-content: center; flex-wrap: wrap; gap: var(--xl); width: 100%; margin: auto; }
   .duo-info .wrapper .contact-wrapper .links { display: flex; flex-direction: column; gap: var(--md); }
   .duo-info .wrapper .contact-wrapper .links .chris,
   .duo-info .wrapper .contact-wrapper .links .oscar { display: flex; flex-direction: column; gap: var(--xs); }
@@ -37,7 +38,7 @@
 <div class="content profile-page-template">
   <div class="duo-info">
     <div class="wrapper">
-      <h1 class="title">Subscribe for more ads</h1>
+      <h1 class="title">{contact?.title}</h1>
       <div class="contact-wrapper">
         <div class="links">
           <div class="chris">
