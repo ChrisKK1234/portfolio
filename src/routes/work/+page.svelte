@@ -60,7 +60,7 @@
         if (!project?.thumbnail) return '';
         const url = project.thumbnail?.cloudinary?.secure_url ?? project.thumbnail?.url;
         if (!url) return '';
-        return url.includes('/upload/') ? url.replace('/upload/', '/upload/h_200,c_fill,f_webp,q_80/') : url;
+        return url.includes('/upload/') ? url.replace('/upload/', '/upload/h_400,c_fill,f_webp,q_80/') : url;
     }
 
     function switchBackground(project) {
