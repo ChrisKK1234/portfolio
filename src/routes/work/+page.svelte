@@ -282,13 +282,13 @@
                             <div class="number"><span>{index + 1}</span></div>
                             <div class="media">
                                 <img src={getThumbnailUrl(project)} alt={project.title} draggable="false"/>
-                                <div class="awards">
+                                <!-- <div class="awards">
                                     {#each getProjectAwards(project) as award}
                                         <div class="award">
                                             <img src={getAwardImageUrl(award)} alt={award.name} />
                                         </div>
                                     {/each}
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     {/each}
@@ -303,13 +303,13 @@
                                 <div class="number"><span>{index + 1}</span></div>
                                 <div class="media">
                                     <img src={getThumbnailUrl(project)} alt={project.title} draggable="false"/>
-                                    <div class="awards">
+                                    <!-- <div class="awards">
                                         {#each getProjectAwards(project) as award}
                                             <div class="award">
                                                 <img src={getAwardImageUrl(award)} alt={award.name} />
                                             </div>
                                         {/each}
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </button>

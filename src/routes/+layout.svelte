@@ -1,7 +1,7 @@
 <script>
   import '../app.css'
   import { fade } from 'svelte/transition'
-  import { beforeNavigate } from '$app/navigation'
+  import { beforeNavigate, onNavigate } from '$app/navigation'
   import { page } from '$app/stores'
   import logotype from '$lib/assets/svg/logotype.svg'
   import defaultImg from '$lib/assets/svg/default.svg'
@@ -16,6 +16,9 @@
     if (to?.url.pathname === '/') {
       sessionStorage.setItem('internal_nav', 'true')
     }
+  })
+  onNavigate(() => {
+    // Tom callback tvinger SvelteKit til at skifte side inden data er loaded
   })
   $: isProject = $page.url.pathname.startsWith('/projects/')
   $: isProfile = $page.url.pathname.startsWith('/profiles/')
